@@ -1,0 +1,90 @@
+<html>
+
+<head>
+  <title>Detectron2</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />        
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <!-- <style>
+  .container{
+    position: absolute;
+    top: 50;
+    left: 50;
+    right: 50;
+    transform: translate(-50, -50);
+  }
+</style> -->
+</head>
+
+<body>
+  <header class="bg-primary text-center py-5 mb-4">
+    <div class="container">
+      <h1 class="font-weight-light text-white">Segmentasi Derajat Luka Bakar</h1>
+    </div>
+  </header>
+  <!-- kontainer untuk input gambar dan menampilkan -->
+  <div class="container">
+    <div class="text-center">
+      <form method="post" action="/" enctype="multipart/form-data">
+        <dl>
+          <p>
+            <input type="file" name="file" class="form-control" autocomplete="off" required>
+            <!-- <label for="file"> Pilih Gambar</label> -->
+          </p>
+        </dl>
+        <p>
+          <button type="submit" class="btn btn-info">Upload</button>
+        </p>
+      </form>
+    </div>
+  <div class="column">
+    <div class="text-center">
+      <div class="col-xl-6 col-md-6 col-sm-6 mb-6">
+        <div class="asli">
+          <h1>Gambar Asli</h1>
+          <p>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+          <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% endwith %}
+          </p>
+          {% if filename %}
+          <div>
+            <img src="{{ url_for('display_image', filename=filename) }}">
+          </div>
+          {% endif %}
+          </p>
+        </div>
+      </div>
+  
+      <div class="col-xl-6 col-md-6 col-sm-6 mb-6">
+        <div class="segmentasi">
+          <h1>Hasil Segmentasi</h1>
+          <p>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+          <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% endwith %}
+          </p>
+          {% if filename %}
+          <div>
+            <img src="{{ url_for('display_segment', filename=filename) }}">
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
